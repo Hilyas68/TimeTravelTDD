@@ -69,19 +69,20 @@ public class TravelTimeDataTest {
   }
 
   @Test
-  @DisplayName("Given travel time between two location are updated, it should return the new travel time")
-  public void setTravelTimeThenReturnNewTime() {
-    travelTimeData.setTravelTime("Leeds", "London", "2:17");
-    travelTimeData.setTravelTime("Leeds", "London", "2:00");
-    String time = travelTimeData.getTravelTime("Leeds", "London");
-    assertEquals("2:00", time, "should return same time");
-  }
-
-  @Test
   @DisplayName("Given two locations are set to the same, it should ignore")
   public void setSameLocationThenIgnore() {
     travelTimeData.setTravelTime("Leeds", "Leeds", "2:00");
     int dataSize = travelTimeData.travelTimes.size();
     assertEquals(0, dataSize, "should return same time");
+  }
+
+  @Test
+  @DisplayName("Given two existing locations when travel time is modified then return average time")
+  public void existingLocationsReturnAverage() {
+    travelTimeData.setTravelTime("Leeds", "London", "2:15");
+    travelTimeData.setTravelTime("Leeds", "London", "2:17");
+    String time = travelTimeData.getTravelTime("Leeds", "London");
+    assertEquals("2:16", time, "should return average time");
+
   }
 }

@@ -2,6 +2,7 @@ package uk.gov.dwp.logic;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -28,11 +29,34 @@ public class TravelTimeData implements TravelTimeDataInterface {
   public void setTravelTime(String travelFromLocation, String travelToLocation, String time) {
 
     if (!travelFromLocation.equals(travelToLocation)) {
-      travelTimes.computeIfAbsent(travelFromLocation, k -> new HashMap<>())
-          .put(travelToLocation, time);
-      travelTimes.computeIfAbsent(travelToLocation, k -> new HashMap<>())
-          .put(travelFromLocation, time);
+
+      Map<String, String> fromMap = travelTimes.get(travelFromLocation);
+      Map<String, String> toMap = travelTimes.get(travelToLocation);
+
+      if (Objects.nonNull(fromMap) && Objects.nonNull(toMap)) {
+        int totalMinutes = parseTravelTime(time) + parseTravelTime(
+            fromMap.getOrDefault(travelToLocation, DEFAULT_TIME));
+        int averageTime = (totalMinutes + 1) / 2;
+        int averagedHour = averageTime / 60;
+        int averagedMinute = averageTime % 60;
+        String averageTimeValue = String.format("%s:%s", averagedHour, averagedMinute);
+
+        fromMap.put(travelToLocation, averageTimeValue);
+        toMap.put(travelToLocation, averageTimeValue);
+      } else {
+        travelTimes.computeIfAbsent(travelFromLocation, k -> new HashMap<>())
+            .put(travelToLocation, time);
+        travelTimes.computeIfAbsent(travelToLocation, k -> new HashMap<>())
+            .put(travelFromLocation, time);
+      }
     }
+  }
+
+  private int parseTravelTime(String travelTime) {
+    String[] timePart = travelTime.split(":");
+    int hours = Integer.parseInt(timePart[0]);
+    int minutes = Integer.parseInt(timePart[1]);
+    return hours * 60 + minutes;
   }
 
   @Override
