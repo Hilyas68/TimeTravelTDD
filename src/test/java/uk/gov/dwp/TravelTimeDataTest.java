@@ -67,4 +67,13 @@ public class TravelTimeDataTest {
     assertEquals("Birmingham,Blackpool,Leeds,London,Manchester,Newcastle", locations,
         "should return all locations");
   }
+
+  @Test
+  @DisplayName("Given travel time between two location are updated, it should return the new travel time")
+  public void setTravelTimeThenReturnNewTime() {
+    travelTimeData.setTravelTime("Leeds", "London", "2:17");
+    travelTimeData.setTravelTime("Leeds", "London", "2:00");
+    String time = travelTimeData.getTravelTime("Leeds", "London");
+    assertEquals("2:00", time, "should return same time");
+  }
 }
