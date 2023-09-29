@@ -1,6 +1,9 @@
 package uk.gov.dwp;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.time.DayOfWeek;
@@ -39,6 +42,14 @@ public class TimeTravelCalculatorTest {
     assertEquals("00:00", time, "Should return zero '00:00' ");
   }
 
+  @Test
+  @DisplayName("Given a travel time data, then setTravelTime is called")
+  public void givenTravelTimeValueIsRecorded() {
+    TimeTravelCalculator timeTravelCalculator = new TimeTravelCalculator(travelTimeData);
+    timeTravelCalculator.setTravelTime("London", "Newcastle", "2:01");
+    verify(travelTimeData, times(1)).setTravelTime(anyString(), anyString(), anyString());
+
+  }
 
   private void givenTravelTIme(String travelFromLocation, String travelToLocation, String time) {
     when(travelTimeData.getTravelTime(travelFromLocation, travelToLocation)).thenReturn(time);
