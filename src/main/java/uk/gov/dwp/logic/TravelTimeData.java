@@ -24,8 +24,11 @@ public class TravelTimeData implements TravelTimeDataInterface {
   @Override
   public void setTravelTime(String travelFromLocation, String travelToLocation, String time) {
 
-    if(!travelFromLocation.equals(travelToLocation)) {
-      travelTimes.computeIfAbsent(travelFromLocation, k -> new HashMap<>()).put(travelToLocation, time);
+    if (!travelFromLocation.equals(travelToLocation)) {
+      travelTimes.computeIfAbsent(travelFromLocation, k -> new HashMap<>())
+          .put(travelToLocation, time);
+      travelTimes.computeIfAbsent(travelToLocation, k -> new HashMap<>())
+          .put(travelFromLocation, time);
     }
   }
 }

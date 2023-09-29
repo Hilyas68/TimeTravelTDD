@@ -26,10 +26,19 @@ public class TravelTimeDataTest {
 
   @Test
   @DisplayName("Given travel time between two location are set, it should return the correct travel time")
-  public void setTravelTimeThenReturnTime(){
+  public void setTravelTimeThenReturnTime() {
     TravelTimeData travelTimeData = new TravelTimeData();
-    travelTimeData.setTravelTime("Leeds","London","2:17");
-    String time = travelTimeData.getTravelTime("Leeds","London");
+    travelTimeData.setTravelTime("Leeds", "London", "2:17");
+    String time = travelTimeData.getTravelTime("Leeds", "London");
     assertEquals("2:17", time, "should return same time");
+  }
+
+  @Test
+  @DisplayName("Given travel time location is set, when you reverse the location it should returm same travel time")
+  public void givenLocationIsReversedReturnSameTime() {
+    TravelTimeData travelTimeData = new TravelTimeData();
+    travelTimeData.setTravelTime("Leeds", "London", "2:17");
+    String time = travelTimeData.getTravelTime("London", "Leeds");
+    assertEquals("2:17", time, "should return same time after changing from to 'To'");
   }
 }
