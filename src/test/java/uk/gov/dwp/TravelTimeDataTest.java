@@ -45,4 +45,15 @@ public class TravelTimeDataTest {
     String time = travelTimeData.getTravelTime("London", "Leeds");
     assertEquals("2:17", time, "should return same time after changing from to 'To'");
   }
+
+  @Test
+  @DisplayName("Given travel data, when getting desstination for a location then return expected destinations")
+  public void getTravelDestinations() {
+    travelTimeData.setTravelTime("Leeds", "London", "2:17");
+    travelTimeData.setTravelTime("Leeds", "Blackpool", "NA");
+    travelTimeData.setTravelTime("Leeds", "Manchester", "1:06");
+    String destinations = travelTimeData.getTravelDestinations("Leeds");
+    assertEquals("Blackpool,London,Manchester", destinations,
+        "should return list destinations separated by comma");
+  }
 }

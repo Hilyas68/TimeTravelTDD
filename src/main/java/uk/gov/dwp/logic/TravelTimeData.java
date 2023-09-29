@@ -31,4 +31,13 @@ public class TravelTimeData implements TravelTimeDataInterface {
           .put(travelFromLocation, time);
     }
   }
+
+  @Override
+  public String getTravelDestinations(String locations) {
+    Map<String, String> destinations = travelTimes.get(locations);
+    if (destinations != null) {
+      return String.join(",", destinations.keySet());
+    }
+    return "";
+  }
 }
