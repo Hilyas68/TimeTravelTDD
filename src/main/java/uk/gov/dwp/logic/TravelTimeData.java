@@ -8,7 +8,7 @@ import java.util.TreeSet;
 public class TravelTimeData implements TravelTimeDataInterface {
 
   public static final String DEFAULT_TIME = "00:00";
-  Map<String, Map<String, String>> travelTimes;
+  public Map<String, Map<String, String>> travelTimes;
 
   public TravelTimeData() {
     this.travelTimes = new HashMap<>();
@@ -27,10 +27,12 @@ public class TravelTimeData implements TravelTimeDataInterface {
   @Override
   public void setTravelTime(String travelFromLocation, String travelToLocation, String time) {
 
+    if (!travelFromLocation.equals(travelFromLocation)) {
       travelTimes.computeIfAbsent(travelFromLocation, k -> new HashMap<>())
           .put(travelToLocation, time);
       travelTimes.computeIfAbsent(travelToLocation, k -> new HashMap<>())
           .put(travelFromLocation, time);
+    }
   }
 
   @Override

@@ -76,4 +76,12 @@ public class TravelTimeDataTest {
     String time = travelTimeData.getTravelTime("Leeds", "London");
     assertEquals("2:00", time, "should return same time");
   }
+
+  @Test
+  @DisplayName("Given two locations are set to the same, it should ignore")
+  public void setSameLocationThenIgnore() {
+    travelTimeData.setTravelTime("Leeds", "Leeds", "2:00");
+    int dataSize = travelTimeData.travelTimes.size();
+    assertEquals(0, dataSize, "should return same time");
+  }
 }
