@@ -51,7 +51,15 @@ public class TimeTravelCalculatorTest {
   public void givenTravelTimeValueIsRecorded() {
     timeTravelCalculator.setTravelTime("London", "Newcastle", "2:01");
     verify(travelTimeData, times(1)).setTravelTime(anyString(), anyString(), anyString());
+  }
 
+  @Test
+  @DisplayName("Given a travel time data, when getTravelLocations called it should call travelTimeData.getTravelLocations")
+  public void givenTravelDataGetLocationsIsCalled() {
+    when(travelTimeData.getTravelLocations()).thenReturn("Leeds,London");
+    String locations = timeTravelCalculator.getTravelLocations();
+    assertEquals("Leeds,London", locations, " should return all locations");
+    verify(travelTimeData, times(1)).getTravelLocations();
   }
 
   private void givenTravelTIme(String travelFromLocation, String travelToLocation, String time) {

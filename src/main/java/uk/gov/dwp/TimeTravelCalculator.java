@@ -17,4 +17,8 @@ public class TimeTravelCalculator {
   public void setTravelTime(String travelFromLocation, String travelToLocation, String time) {
     this.travelTimeData.setTravelTime(travelFromLocation, travelToLocation, time);
   }
+
+  public String getTravelLocations() {
+    return travelTimeData.getTravelLocations();
+  }
 }
