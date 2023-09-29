@@ -15,4 +15,12 @@ public class TravelTimeDataTest {
     String time = travelTimeData.getTravelTime("Leeds", "Leeds");
     assertEquals("00:00", time, "should return '00:00'");
   }
+
+  @Test
+  @DisplayName("Given destination travel time has not been previously submitted then return '00:00'")
+  public void givenNoTravelTimeForDestinationReturnZero() {
+    TravelTimeData travelTimeData = new TravelTimeData();
+    String time = travelTimeData.getTravelTime("Leeds", "Manchester");
+    assertEquals("00:00", time, "should return '00:00'");
+  }
 }
