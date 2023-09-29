@@ -23,4 +23,13 @@ public class TravelTimeDataTest {
     String time = travelTimeData.getTravelTime("Leeds", "Manchester");
     assertEquals("00:00", time, "should return '00:00'");
   }
+
+  @Test
+  @DisplayName("Given travel time between two location are set, it should return the correct travel time")
+  public void setTravelTimeThenReturnTime(){
+    TravelTimeData travelTimeData = new TravelTimeData();
+    travelTimeData.setTravelTime("Leeds","London","2:17");
+    String time = travelTimeData.getTravelTime("Leeds","London");
+    assertEquals("2:17", time, "should return same time");
+  }
 }

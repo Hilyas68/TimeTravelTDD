@@ -20,4 +20,12 @@ public class TravelTimeData implements TravelTimeDataInterface {
 
     return fromMap.getOrDefault(travelToLocation, "00:00");
   }
+
+  @Override
+  public void setTravelTime(String travelFromLocation, String travelToLocation, String time) {
+
+    if(!travelFromLocation.equals(travelToLocation)) {
+      travelTimes.computeIfAbsent(travelFromLocation, k -> new HashMap<>()).put(travelToLocation, time);
+    }
+  }
 }
