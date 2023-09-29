@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class TravelTimeData implements TravelTimeDataInterface {
 
+  public static final String DEFAULT_TIME = "00:00";
   Map<String, Map<String, String>> travelTimes;
 
   public TravelTimeData() {
@@ -14,11 +15,11 @@ public class TravelTimeData implements TravelTimeDataInterface {
   @Override
   public String getTravelTime(String travelFromLocation, String travelToLocation) {
     if (travelFromLocation.equals(travelToLocation)) {
-      return "00:00";
+      return DEFAULT_TIME;
     }
     Map<String, String> fromMap = travelTimes.getOrDefault(travelFromLocation, new HashMap<>());
 
-    return fromMap.getOrDefault(travelToLocation, "00:00");
+    return fromMap.getOrDefault(travelToLocation, DEFAULT_TIME);
   }
 
   @Override
