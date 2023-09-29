@@ -21,4 +21,8 @@ public class TimeTravelCalculator {
   public String getTravelLocations() {
     return travelTimeData.getTravelLocations();
   }
+
+  public String getTravelDestinations(String location) {
+    return travelTimeData.getTravelDestinations(location);
+  }
 }

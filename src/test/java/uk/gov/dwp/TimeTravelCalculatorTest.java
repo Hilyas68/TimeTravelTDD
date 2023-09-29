@@ -1,6 +1,7 @@
 package uk.gov.dwp;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -60,6 +61,15 @@ public class TimeTravelCalculatorTest {
     String locations = timeTravelCalculator.getTravelLocations();
     assertEquals("Leeds,London", locations, " should return all locations");
     verify(travelTimeData, times(1)).getTravelLocations();
+  }
+
+  @Test
+  @DisplayName("Given a travel time data, when getTravelDestinations called it should call travelTimeData.getTravelDestinations")
+  public void givenTravelDataGetDestinationIsCalled() {
+    when(travelTimeData.getTravelDestinations(any())).thenReturn("Leeds,London");
+    String destinations = timeTravelCalculator.getTravelDestinations("Leeds");
+    assertEquals("Leeds,London", destinations, " should return all destinations");
+    verify(travelTimeData, times(1)).getTravelDestinations(anyString());
   }
 
   private void givenTravelTIme(String travelFromLocation, String travelToLocation, String time) {
