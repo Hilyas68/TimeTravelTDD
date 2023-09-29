@@ -2,6 +2,8 @@ package uk.gov.dwp.logic;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class TravelTimeData implements TravelTimeDataInterface {
 
@@ -40,5 +42,11 @@ public class TravelTimeData implements TravelTimeDataInterface {
       return String.join(",", destinations.keySet());
     }
     return "";
+  }
+
+  @Override
+  public String getTravelLocations() {
+    Set<String> sortedLocations = new TreeSet<>(travelTimes.keySet());
+    return String.join(",", sortedLocations);
   }
 }

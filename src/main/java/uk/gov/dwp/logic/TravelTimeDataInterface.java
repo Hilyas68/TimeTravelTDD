@@ -7,4 +7,6 @@ public interface TravelTimeDataInterface {
   void setTravelTime(String travelFromLocation, String travelToLocation, String time);
 
   String getTravelDestinations(String leeds);
+
+  String getTravelLocations();
 }

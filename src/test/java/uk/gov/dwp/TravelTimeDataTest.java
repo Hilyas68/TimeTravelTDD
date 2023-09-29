@@ -56,4 +56,15 @@ public class TravelTimeDataTest {
     assertEquals("Blackpool,London,Manchester", destinations,
         "should return list destinations separated by comma");
   }
+
+  @Test
+  @DisplayName("Given travel data, return all recognized locations")
+  public void getAllLocation() {
+    travelTimeData.setTravelTime("Leeds", "London", "2:17");
+    travelTimeData.setTravelTime("Newcastle", "Blackpool", "NA");
+    travelTimeData.setTravelTime("Birmingham", "Manchester", "1:06");
+    String locations = travelTimeData.getTravelLocations();
+    assertEquals("Birmingham,Blackpool,Leeds,London,Manchester,Newcastle", locations,
+        "should return all locations");
+  }
 }
