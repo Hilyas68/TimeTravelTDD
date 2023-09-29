@@ -4,7 +4,7 @@ import uk.gov.dwp.logic.TravelTimeDataInterface;
 
 public class TimeTravelCalculator {
 
-  private TravelTimeDataInterface travelTimeData;
+  private final TravelTimeDataInterface travelTimeData;
 
   public TimeTravelCalculator(TravelTimeDataInterface travelTimeData) {
     this.travelTimeData = travelTimeData;
