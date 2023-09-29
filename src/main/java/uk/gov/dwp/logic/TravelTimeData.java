@@ -36,10 +36,8 @@ public class TravelTimeData implements TravelTimeDataInterface {
       if (Objects.nonNull(fromMap) && Objects.nonNull(toMap)) {
         int totalMinutes = parseTravelTime(time) + parseTravelTime(
             fromMap.getOrDefault(travelToLocation, DEFAULT_TIME));
-        int averageTime = (totalMinutes + 1) / 2;
-        int averagedHour = averageTime / 60;
-        int averagedMinute = averageTime % 60;
-        String averageTimeValue = String.format("%s:%s", averagedHour, averagedMinute);
+        int averageTimeInMinutes = (totalMinutes + 1) / 2;
+        String averageTimeValue = formatTravelTime(averageTimeInMinutes);
 
         fromMap.put(travelToLocation, averageTimeValue);
         toMap.put(travelToLocation, averageTimeValue);
@@ -50,6 +48,12 @@ public class TravelTimeData implements TravelTimeDataInterface {
             .put(travelFromLocation, time);
       }
     }
+  }
+
+  private static String formatTravelTime(int averageTime) {
+    int averagedHour = averageTime / 60;
+    int averagedMinute = averageTime % 60;
+    return String.format("%s:%s", averagedHour, averagedMinute);
   }
 
   private int parseTravelTime(String travelTime) {
